@@ -23,12 +23,8 @@ jobs:
       - name: Git Clone FAUDIO 
         shell: pwsh
         run: |
-          dir
-          mkdir FAudio
-          dir
           git clone https://github.com/FNA-XNA/FAudio.git > out.txt
-          dir
-          cd FAudio
+          cd FAudio\visualc-winrt
           dir
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
         uses: actions/upload-artifact@master
