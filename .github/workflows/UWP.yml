@@ -58,13 +58,22 @@ jobs:
           mkdir DANUWP
           cd DANUWP
           cmake -G "Visual Studio 16 2019" -A x64 .. -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0 -DBUILD_SHARED_LIBS=ON -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DPROFILE_METAL=OFF -DPROFILE_SPIRV=OFF -DPROFILE_GLSPIRV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
+          dir
       - name: Build MojoShader
         shell: cmd
-        run: MSBuild.exe "Mojoshader\DANUWP\mojoshader.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+        run: MSBuild.exe "Mojoshader\DANUWP\mojoshader.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Copy Binaries
+        shell: cmd
+        run: |
+          mkdir Binaries
+          copy SDL2\VisualC-WinRT\UWP_VS2015\x64\Release\SDL-UWP\SDL2.dll Binaries
+          copy FAUDIO\visualc-winrt\x64\Release\FAudio\FAudio.dll Binaries
+          copy SDL_image_compact\visualc-winrt\x64\Release\SDL_image\SDL_image.dll Binaries
+          copy Theorafile\visualc-winrt\x64\Release\libtheorafile\libtheorafile.dll Binaries
+          copy Mojoshader\DANUWP\Release\mojoshader.dll Binaries
+          7z a FNA-UWP.Binaries.zip Binaries\*
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
         uses: actions/upload-artifact@master
         with:
           name: UWP Libraries for ${{ matrix.variant }} on ${{ matrix.os }}
-          path: out.txt          
-
-#   grab DLLs and zip as asset
+          path: FNA-UWP.Binaries.zip          
