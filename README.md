@@ -1,5 +1,7 @@
 # FNA-UWP-Build
 
+![UWP Build](https://github.com/clarvalon/FNA-UWP-Build/workflows/UWP%20Build/badge.svg)
+
 Repo for automating the build of WinRT/UWP libraries for [FNA](https://fna-xna.github.io/).
 
 Note:
