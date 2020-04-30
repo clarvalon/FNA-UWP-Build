@@ -18,14 +18,24 @@ jobs:
       DEPOT_TOOLS_METRICS: '0'
       PYTHON_HOME: ''
     steps:
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.0
       - name: Check out source
         uses: actions/checkout@v1
+      - name: Hg Clone SDL2
+        shell: pwsh
+        run: |
+          hg clone http://hg.libsdl.org/SDL
+      - name: Build SDL2
+        shell: pwsh
+        run: |
+          dir
+          MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.vcxproj" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
       - name: Git Clone FAUDIO 
         shell: pwsh
         run: |
+          dir
           git clone https://github.com/FNA-XNA/FAudio.git
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.0
       - name: Build FAudio
         shell: pwsh
         run: |
