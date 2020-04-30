@@ -24,12 +24,12 @@ jobs:
         shell: pwsh
         run: |
           git clone https://github.com/FNA-XNA/FAudio.git
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.0
+      #- name: Add msbuild to PATH
+      #  uses: microsoft/setup-msbuild@v1.0.0
       - name: Build FAudio
         shell: pwsh
         run: |
-          msbuild FAudio\visualc-winrt\FAudio.vcxproj
+          %ProgramFiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe FAudio\visualc-winrt\FAudio.vcxproj
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
         uses: actions/upload-artifact@master
         with:
