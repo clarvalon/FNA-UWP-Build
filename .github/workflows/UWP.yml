@@ -1,0 +1,32 @@
+name: UWP Build
+
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  windows:
+    strategy:
+      matrix:
+        os: [windows-2019]
+        variant: [Release]
+    runs-on: ${{ matrix.os }}
+    name: UWP ${{ matrix.variant }} on ${{ matrix.os }}
+    env:
+      DEPOT_TOOLS_WIN_TOOLCHAIN: '0'
+      DEPOT_TOOLS_METRICS: '0'
+      PYTHON_HOME: ''
+    steps:
+      - name: Git Clone FAUDIO 
+        shell: pwsh
+        run: |
+          git clone https://github.com/FNA-XNA/FAudio.git
+          cd visualc-winrt
+          
+# TODO:
+#   mercurial clone SDL2 (first)
+#   figure out build command
+#   git clone other libraries
+#   build everything
+#   grab DLLs and zip as asset
