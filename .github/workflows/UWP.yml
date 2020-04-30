@@ -28,7 +28,8 @@ jobs:
           dir
           git clone https://github.com/FNA-XNA/FAudio.git > out.txt
           dir
-          cd visualc-winrt
+          cd FAudio
+          dir
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
         uses: actions/upload-artifact@master
         with:
