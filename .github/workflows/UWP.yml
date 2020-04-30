@@ -30,22 +30,41 @@ jobs:
       - name: Build SDL2
         shell: cmd
         run: MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0 /p:WindowsTargetPlatformMinVersion=10.0.16299.0
-      - name: Git Clone FAUDIO 
+      - name: Git Clone FAudio
         shell: cmd
-        run: |
-          dir
-          git clone https://github.com/FNA-XNA/FAudio.git
+        run: git clone https://github.com/FNA-XNA/FAudio.git
       - name: Build FAudio
         shell: cmd
         run: MSBuild.exe FAudio\visualc-winrt\FAudio.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Git Clone SDL_image_compact
+        shell: cmd
+        run: git clone https://github.com/FNA-XNA/SDL_image_compact.git
+      - name: Build SDL_image_compact
+        shell: cmd
+        run: MSBuild.exe SDL_image_compact\visualc-winrt\SDL_image.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Git Clone Theorafile
+        shell: cmd
+        run: git clone https://github.com/FNA-XNA/Theorafile.git
+      - name: Build Theorafile
+        shell: cmd
+        run: MSBuild.exe Theorafile\visualc-winrt\libtheorafile.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Git Clone MojoShader
+        shell: cmd
+        run: git clone https://github.com/FNA-XNA/MojoShader.git
+      - name: CMake MojoShader
+        shell: cmd
+        run: |
+          cd MojoShader
+          mkdir DANUWP
+          cd DANUWP
+          cmake -G "Visual Studio 16 2019" -A x64 .. -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0 -DBUILD_SHARED_LIBS=ON -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DPROFILE_METAL=OFF -DPROFILE_SPIRV=OFF -DPROFILE_GLSPIRV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
+      - name: Build MojoShader
+        shell: cmd
+        run: MSBuild.exe "Mojoshader\DANUWP\mojoshader.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
         uses: actions/upload-artifact@master
         with:
           name: UWP Libraries for ${{ matrix.variant }} on ${{ matrix.os }}
           path: out.txt          
-# TODO:
-#   mercurial clone SDL2 (first)
-#   figure out build command
-#   git clone other libraries
-#   build everything
+
 #   grab DLLs and zip as asset
