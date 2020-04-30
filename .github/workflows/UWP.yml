@@ -29,7 +29,7 @@ jobs:
       - name: Build FAudio
         shell: pwsh
         run: |
-          MSBuild.exe FAudio\visualc-winrt\FAudio.vcxproj /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+          MSBuild.exe FAudio\visualc-winrt\FAudio.vcxproj /p:Configuration=Release /p:Platform=x64 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
         uses: actions/upload-artifact@master
         with:
