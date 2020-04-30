@@ -29,6 +29,8 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.0
       - name: Build FAudio
+        shell: pwsh
+        run: |
           dir
           msbuild FAudio.vcxproj
       - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
