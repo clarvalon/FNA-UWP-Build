@@ -25,7 +25,7 @@ jobs:
       - name: Hg Clone SDL2
         shell: pwsh
         run: |
-          hg clone http://hg.libsdl.org/SDL
+          hg clone SDL2 http://hg.libsdl.org/SDL
       - name: Build SDL2
         shell: pwsh
         run: |
