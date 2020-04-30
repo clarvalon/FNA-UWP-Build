@@ -1,6 +1,6 @@
 # FNA-UWP-Build
 
-Repo for automatic the build of WinRT/UWP libraries for [FNA](https://fna-xna.github.io/).
+Repo for automating the build of WinRT/UWP libraries for [FNA](https://fna-xna.github.io/).
 
 Note:
 
