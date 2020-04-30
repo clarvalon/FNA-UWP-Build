@@ -21,7 +21,7 @@ jobs:
       - name: TEST
         shell: pwsh
         run: |
-          test.bat  
+          .\test.bat  
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.0
       - name: Check out source
