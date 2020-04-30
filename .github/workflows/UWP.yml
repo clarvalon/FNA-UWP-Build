@@ -31,7 +31,7 @@ jobs:
         shell: pwsh
         run: |
           dir
-          MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.vcxproj" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+          MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
       - name: Git Clone FAUDIO 
         shell: pwsh
         run: |
