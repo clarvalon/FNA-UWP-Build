@@ -18,11 +18,13 @@ jobs:
       DEPOT_TOOLS_METRICS: '0'
       PYTHON_HOME: ''
     steps:
+      - name: Check out source
+        uses: actions/checkout@v1
       - name: Git Clone FAUDIO 
         shell: pwsh
         run: |
           dir
-          git clone https://github.com/FNA-XNA/FAudio.git
+          git clone https://github.com/FNA-XNA/FAudio.git > out.txt
           cd visualc-winrt
           
 # TODO:
