@@ -13,10 +13,6 @@ jobs:
         variant: [Release]
     runs-on: ${{ matrix.os }}
     name: UWP ${{ matrix.variant }} on ${{ matrix.os }}
-    env:
-      DEPOT_TOOLS_WIN_TOOLCHAIN: '0'
-      DEPOT_TOOLS_METRICS: '0'
-      PYTHON_HOME: ''
     steps:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.0
@@ -61,7 +57,10 @@ jobs:
           dir
       - name: Build MojoShader
         shell: cmd
-        run: MSBuild.exe "Mojoshader\DANUWP\mojoshader.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+        run: |
+          cd MojoShader\DANUWP
+          dir
+          MSBuild.exe mojoshader.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
       - name: Copy Binaries
         shell: cmd
         run: |
