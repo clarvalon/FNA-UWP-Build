@@ -1,0 +1,62 @@
+name: UWP Build (FNA3D)
+
+on: 
+  push:
+    branches: 
+      - master
+  schedule:
+    - cron: "0 0 * * *"
+      
+jobs:
+  windows:
+    strategy:
+      matrix:
+        os: [windows-2019]
+        variant: [Release]
+    runs-on: ${{ matrix.os }}
+    name: UWP ${{ matrix.variant }} on ${{ matrix.os }}
+    steps:
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.0
+      - name: Check out source
+        uses: actions/checkout@v1
+      - name: Hg Clone SDL2
+        shell: cmd
+        run: |
+          mkdir SDL2
+          hg clone http://hg.libsdl.org/SDL SDL2
+      - name: Build SDL2
+        shell: cmd
+        run: MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0 /p:WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Git Clone FNA3D
+        shell: cmd
+        run: git clone --recursive https://github.com/FNA-XNA/FNA3D.git -b directx11
+      - name: Build FNA3D
+        shell: cmd
+        run: MSBuild.exe FNA3D\visualc-winrt\FNA3D.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Git Clone FAudio
+        shell: cmd
+        run: git clone https://github.com/FNA-XNA/FAudio.git
+      - name: Build FAudio
+        shell: cmd
+        run: MSBuild.exe FAudio\visualc-winrt\FAudio.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Git Clone Theorafile
+        shell: cmd
+        run: git clone https://github.com/FNA-XNA/Theorafile.git
+      - name: Build Theorafile
+        shell: cmd
+        run: MSBuild.exe Theorafile\visualc-winrt\libtheorafile.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0;WindowsTargetPlatformMinVersion=10.0.16299.0
+      - name: Copy Binaries
+        shell: cmd
+        run: |
+          mkdir Binaries
+          copy SDL2\VisualC-WinRT\UWP_VS2015\x64\Release\SDL-UWP\SDL2.dll Binaries
+          copy FNA3D\visualc-winrt\x64\Release\FNA3D\FNA3D.dll Binaries
+          copy FAUDIO\visualc-winrt\x64\Release\FAudio\FAudio.dll Binaries
+          copy Theorafile\visualc-winrt\x64\Release\libtheorafile\libtheorafile.dll Binaries
+          7z a FNA-UWP.FNA3D.Binaries.zip Binaries\*
+      - name: Archive ${{ matrix.variant }} UWP archive on ${{ matrix.os }}
+        uses: actions/upload-artifact@master
+        with:
+          name: UWP Libraries for ${{ matrix.variant }} on ${{ matrix.os }}
+          path: FNA-UWP.FNA3D.Binaries.zip          
