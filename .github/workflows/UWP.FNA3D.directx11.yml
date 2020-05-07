@@ -1,4 +1,4 @@
-name: UWP Build (FNA3D)
+name: UWP Build (FNA3D directx11)
 
 on: 
   push:
