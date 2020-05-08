@@ -16,4 +16,4 @@ There are three workflows:
 
 Notes:
 
-* Angle DLLs (libEGL.dll, libGLESv2.dll) may also needed and can be obtained seperately [here](https://github.com/cybik/angle-bootstraps/actions?query=workflow%3A%22Matrixed+UWP+Build%22).
+* Angle DLLs (_libEGL.dll_, _libGLESv2.dll_) may also needed and can be obtained seperately [here](https://github.com/cybik/angle-bootstraps/actions?query=workflow%3A%22Matrixed+UWP+Build%22).
