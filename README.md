@@ -7,3 +7,5 @@ This repo is for automating the build of WinRT/UWP libraries for [FNA](https://f
 There is currently just one workflow:
 
 1.  **UWP Build (FNA3D)**.  This is for the beta version of FNA3D.  See [here](https://github.com/FNA-XNA/FNA/wiki/BETA:-FNA3D) for details.  For WinRT this uses Directx11 by default as the renderer.  This does *not* require ANGLE.
+
+See the FNA [Xbox instructions](https://github.com/FNA-XNA/FNA/wiki/Appendix-B:-FNA-on-Consoles#xbox-one) for additional details.
