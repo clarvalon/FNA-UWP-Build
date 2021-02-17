@@ -21,11 +21,11 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Check out source
         uses: actions/checkout@v1
-      - name: Hg Clone SDL2
+      - name: Git Clone SDL2
         shell: cmd
         run: |
           mkdir SDL2
-          hg clone http://hg.libsdl.org/SDL SDL2
+          git clone https://github.com/libsdl-org/SDL.git SDL2
       - name: Build SDL2
         shell: cmd
         run: MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0 /p:WindowsTargetPlatformMinVersion=10.0.16299.0
