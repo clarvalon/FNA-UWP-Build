@@ -4,10 +4,10 @@
 
 This repo is for automating the build of WinRT/UWP native libraries for [FNA](https://fna-xna.github.io/), including:
 
-* FNA3D.dll 
-* FAudio.dll
-* SDL2.dll
-* libtheorafile.dll
+* [FNA3D.dll](https://github.com/FNA-XNA/FNA3D) - 3D graphics library for FNA.
+* [FAudio.dll](https://github.com/FNA-XNA/FAudio) - XAudio reimplementation for FNA.
+* [SDL2.dll](https://github.com/libsdl-org/SDL) - Simple DirectMedia Layer.
+* [libtheorafile.dll](https://github.com/FNA-XNA/Theorafile) - Ogg Theora videos decoder library.
 
 There is currently just one workflow:
 
