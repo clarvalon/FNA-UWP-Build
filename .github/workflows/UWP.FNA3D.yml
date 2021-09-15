@@ -28,7 +28,7 @@ jobs:
           git clone https://github.com/libsdl-org/SDL.git SDL2
       - name: Build SDL2
         shell: cmd
-        run: MSBuild.exe "SDL2\VisualC-WinRT\UWP_VS2015\SDL-UWP.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0 /p:WindowsTargetPlatformMinVersion=10.0.16299.0
+        run: MSBuild.exe "SDL2\VisualC-WinRT\SDL-UWP.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.16299.0 /p:WindowsTargetPlatformMinVersion=10.0.16299.0
       - name: Git Clone FNA3D
         shell: cmd
         run: git clone --recursive https://github.com/FNA-XNA/FNA3D.git
@@ -51,7 +51,7 @@ jobs:
         shell: cmd
         run: |
           mkdir Binaries
-          copy SDL2\VisualC-WinRT\UWP_VS2015\x64\Release\SDL-UWP\SDL2.dll Binaries
+          copy SDL2\VisualC-WinRT\x64\Release\SDL-UWP\SDL2.dll Binaries
           copy FNA3D\visualc-winrt\x64\Release\FNA3D\FNA3D.dll Binaries
           copy FAUDIO\visualc-winrt\x64\Release\FAudio\FAudio.dll Binaries
           copy Theorafile\visualc-winrt\x64\Release\libtheorafile\libtheorafile.dll Binaries
